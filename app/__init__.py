@@ -28,6 +28,8 @@ def create_app():
     app.register_blueprint(productos)
     from .routes.carrito import carrito
     app.register_blueprint(carrito)
+    from .routes.inicio import inicio
+    app.register_blueprint(inicio)
 
     # Devulvo la app creada
     return app

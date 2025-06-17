@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+
+{% block title %}Carrito{% endblock %}
+
+{% block content %}
 <head>
     <title>Mi Carrito</title>
     <style>
@@ -59,4 +62,4 @@
 
     <a href="{{ url_for('productos.lista_productos') }}">Seguir comprando</a>
 </body>
-</html>
+{% endblock %}

@@ -1,0 +1,87 @@
+<!-- templates/inicio.html (plantilla base) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Mi Tienda{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos_base.css') }}">
+    <style>
+    /* Reset básico para eliminar margenes, padding y estilos por defecto */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    /* Estilo para el body */
+    body {
+        background: #f5f5f5;
+        color: #333;
+    }
+
+    /* Menu de navegación a lo largo de toda la pantalla */
+    nav {
+        width: 100%;
+        background: #ff6f61;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        box-shadow: 0 4px 12px -4px black;
+    }
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-right: 30px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        font-weight: bold;
+    }
+
+    nav a:last-child {
+        margin-right: 0;
+    }
+
+    nav a:hover {
+        color: #ffcccb;
+        transform: translateY(-2px);
+    }
+
+    /* Main con padding para que el texto no esté tan pegado a los bordes */
+    main {
+        padding: 20px;
+        background: #ffffff;
+        min-height: 80vh;
+    }
+
+    /* Footer básico centrado */
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #888;
+        background: #ff6f61;
+        color: #ffffff;
+        box-shadow: 0 -4px 12px -4px black;
+    }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('inicio.mostrar_inicio') }}">Inicio</a>
+        <a href="{{ url_for('productos.lista_productos') }}">Productos</a>
+        <a href="{{ url_for('carrito.ver_carrito') }}">Carrito</a>
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Aquí irá el contenido específico de cada página -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 AppTienda --- Kevin Berrio Bautista</p>
+    </footer>
+</body>
+</html>
