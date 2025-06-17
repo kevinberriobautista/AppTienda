@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Producto</title>
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        <label>Nombre:</label><br>
+        <input type="text" name="nombre" value="{{ producto.nombre }}"><br><br>
+
+        <label>Descripción:</label><br>
+        <textarea name="descripcion">{{ producto.descripcion }}</textarea><br><br>
+
+        <label>Precio:</label><br>
+        <input type="number" step="0.01" name="precio" value="{{ producto.precio }}"><br><br>
+
+        <label>Stock:</label><br>
+        <input type="number" name="stock" value="{{ producto.stock }}"><br><br>
+
+        <input type="submit" value="Guardar Cambios">
+    </form>
+    <a href="{{ url_for('productos.lista_productos') }}">Volver a la lista</a>
+</body>
+</html>

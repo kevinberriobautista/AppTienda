@@ -2,21 +2,83 @@
 <html>
 <head>
     <title>Lista de Productos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        .btn {
+            padding: 4px 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-añadir {
+            background-color: #4b99ff;
+        }
+        .btn-editar {
+            background-color: #4CAF50;
+        }
+        .btn-borrar {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
     <h1>Productos en la tienda</h1>
-    <a href="{{ url_for('productos.nuevo_producto') }}">Agregar nuevo producto</a>
-    <ul>
-        {% for producto in productos %}
-            <li>
-                <strong>{{ producto.nombre }}</strong> -
-                {{ producto.descripcion }} -
-                Precio: {{ producto.precio }} € -
-                Stock: {{ producto.stock }}
-            </li>
-        {% else %}
-            <li>No hay productos disponibles.</li>
-        {% endfor %}
-    </ul>
+    <a href="{{ url_for('productos.nuevo_producto') }}">Agregar nuevo producto</a> |
+    <a href="{{ url_for('carrito.ver_carrito') }}">Ver carrito</a>
+
+    {% if productos %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio (€)</th>
+                <th>Stock</th>
+                <th>Añadir</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>
+                    <form action="{{ url_for('carrito.agregar_al_carrito', id=producto.id) }}"
+                          method="POST">
+                        <button type="submit" class="btn btn-añadir">Agregar al carrito</button>
+                    </form>
+                </td>
+                <td>
+                    <a href="{{ url_for('productos.editar_producto', id=producto.id) }}" class="btn btn-editar">Editar</a>
+                </td>
+                <td>
+                    <form action="{{ url_for('productos.eliminar_producto', id=producto.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-borrar" onclick="return confirm('¿Seguro que quieres borrar este producto?');">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay productos disponibles.</p>
+    {% endif %}
 </body>
 </html>
